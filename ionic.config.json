@@ -2,5 +2,7 @@
   "name": "bobbyzzaiolo-ionic",
   "app_id": "929fe0d1",
   "type": "ionic-angular",
-  "integrations": {}
+  "integrations": {
+    "cordova": {}
+  }
 }
