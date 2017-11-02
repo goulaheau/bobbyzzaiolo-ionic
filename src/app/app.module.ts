@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
+import { HttpModule } from "@angular/http";
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -7,12 +8,13 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { PizzaProvider } from '../providers/pizza/pizza';
-import { HttpModule } from "@angular/http";
+import { PizzaPage } from "../pages/pizza/pizza";
 
 @NgModule({
   declarations: [
     MyApp,
-    HomePage
+    HomePage,
+    PizzaPage
   ],
   imports: [
     BrowserModule,
@@ -22,13 +24,13 @@ import { HttpModule } from "@angular/http";
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage
+    HomePage,
+    PizzaPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    PizzaProvider,
     PizzaProvider
   ]
 })

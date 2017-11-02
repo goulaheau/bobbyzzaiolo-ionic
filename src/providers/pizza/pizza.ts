@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { Observable } from "rxjs/Observable";
+import { Pizza } from "../../models/pizza";
 
 /*
   Generated class for the PizzaProvider provider.
@@ -11,14 +12,68 @@ import { Observable } from "rxjs/Observable";
 */
 @Injectable()
 export class PizzaProvider {
+  /**
+   * Base URL
+   *
+   * @type {string}
+   */
+  private readonly url = 'http://localhost:3000/pizzas';
 
-  private readonly url = 'http://10.13.2.167:8080/pizza';
-
+  /**
+   * Constructor
+   *
+   * @param {Http} http
+   */
   constructor(public http: Http) {
   }
 
-  get(): Observable<Response> {
+  /**
+   * Get all Pizzas
+   *
+   * @returns {Observable<Pizza[]>}
+   */
+  getAll(): Observable<Pizza[]> {
     return this.http.get(this.url).map(res => res.json());
   }
 
+  /**
+   * Get the pizza with the given ID
+   *
+   * @param {number} id
+   * @returns {Observable<Pizza>}
+   */
+  get(id: number): Observable<Pizza> {
+    return this.http.get(`${this.url}/${id}`).map(res => res.json());
+  }
+
+  /**
+   * Save the pizza
+   *
+   * @param {Pizza} body
+   * @returns {Observable<Pizza>}
+   */
+  post(body: Pizza): Observable<Pizza> {
+    return this.http.post(this.url, body).map(res => res.json());
+  }
+
+  /**
+   * Modify the pizza with the given ID
+   *
+   * @param {number} id
+   * @param {Pizza} body
+   * @returns {Observable<Pizza>}
+   */
+  put(id: number, body: Pizza): Observable<Pizza> {
+    return this.http.put(`${this.url}/${id}`, body).map(res => res.json());
+  }
+
+  /**
+   * Delete the pizza with the given ID
+   *
+   * @param {number} id
+   * @returns {Observable<Pizza>}
+   */
+  delete(id: number): Observable<Pizza> {
+    return this.http.delete(`${this.url}/${id}`).map(res => res.json());
+  }
 }

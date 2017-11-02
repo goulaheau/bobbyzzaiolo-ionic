@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Pizza</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-card>
+    <ion-card-header>
+      {{pizza.name}}
+      <span float-right>{{pizza.price}} €</span>
+    </ion-card-header>
+    <ion-card-content>
+      <img src="{{pizza.picture}}" alt="Image de {{pizza.name}}">
+    </ion-card-content>
+  </ion-card>
+</ion-content>

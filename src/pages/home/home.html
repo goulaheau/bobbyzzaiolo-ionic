@@ -7,14 +7,19 @@
 </ion-header>
 
 <ion-content padding>
-
-  <ion-card *ngFor="let pizza of pizzas">
-    <ion-card-header>
-      {{pizza.name}}
-    </ion-card-header>
-    <ion-card-content>
-      <img src="{{pizza.picture}}" alt="">
-    </ion-card-content>
-  </ion-card>
-
+  <ion-grid>
+    <ion-row>
+      <ion-col col-md-3 *ngFor="let pizza of pizzas">
+        <ion-card [navPush]="pizzaPage" [navParams]="pizza">
+          <ion-card-header>
+            {{pizza.name}}
+            <span float-right>{{pizza.price}} €</span>
+          </ion-card-header>
+          <ion-card-content>
+            <img src="{{pizza.image}}" alt="Image de {{pizza.name}}">
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
