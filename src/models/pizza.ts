@@ -1,9 +1,10 @@
-import { Ingredient } from "./ingredient";
-
-export class Pizza {
-  name: String;
-  description: String;
-  price: Number;
-  image: String;
-  ingredients: Ingredient[];
+export interface Pizza {
+  _id?: string;
+  name: string;
+  description: string;
+  price: string;
+  image: string;
+  ingredients: any[];
+  createdAt?: Date;
+  updatedAt?: Date;
 }

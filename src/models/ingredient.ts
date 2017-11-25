@@ -1,5 +1,6 @@
-export class Ingredient {
-  name: String;
-  weight: String;
-  price: Number;
+export interface Ingredient {
+  _id?: string;
+  name: string;
+  weight: string;
+  price: string;
 }

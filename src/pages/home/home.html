@@ -1,19 +1,24 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>
-      Bobbyzzaiolo
-    </ion-title>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Bobbyzzaiolo</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
   <ion-grid>
     <ion-row>
-      <ion-col col-md-3 *ngFor="let pizza of pizzas">
-        <ion-card [navPush]="pizzaPage" [navParams]="pizza">
+      <ion-col col-12>
+        <h1>La carte</h1>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-lg-2 col-md-3 col-sm-6 *ngFor="let pizza of pizzas">
+        <ion-card [navPush]="pizzaDetailPage" [navParams]="pizza">
           <ion-card-header>
-            {{pizza.name}}
-            <span float-right>{{pizza.price}} €</span>
+            {{pizza.name}} - {{pizza.price}} €
           </ion-card-header>
           <ion-card-content>
             <img src="{{pizza.image}}" alt="Image de {{pizza.name}}">

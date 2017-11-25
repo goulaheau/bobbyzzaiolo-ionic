@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { PizzaProvider } from "../../providers/pizza/pizza";
 import { Pizza } from "../../models/pizza";
-import { PizzaPage } from "../pizza/pizza";
+import { PizzaDetailPage } from "../pizza-detail/pizza-detail";
 
 @Component({
   selector   : 'page-home',
@@ -10,14 +10,13 @@ import { PizzaPage } from "../pizza/pizza";
 })
 export class HomePage {
   pizzas: Pizza[];
-  pizzaPage: typeof PizzaPage;
+  pizzaDetailPage: typeof PizzaDetailPage;
 
   constructor(public navCtrl: NavController,
               private pizzaProvider: PizzaProvider) {
-    this.pizzaPage = PizzaPage;
+    this.pizzaDetailPage = PizzaDetailPage;
     this.pizzaProvider.getAll().subscribe(
-      res => this.pizzas = res,
-      err => console.log(err)
+      res => this.pizzas = res
     );
   }
 }
