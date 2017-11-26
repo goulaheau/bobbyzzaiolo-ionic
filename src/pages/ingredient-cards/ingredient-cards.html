@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Bobbyzzaiolo</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-grid>
+    <ion-row>
+      <ion-col col-12>
+        <h1>
+          Ingrédients
+          <ion-icon name="add-circle" [navPush]="ingredientFormPage"
+                    small></ion-icon>
+        </h1>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-lg-2 col-md-3 col-sm-6
+               *ngFor="let ingredient of ingredients">
+        <ion-card>
+          <ion-card-header>
+            {{ingredient.name}} - {{ingredient.price}} €
+          </ion-card-header>
+
+          <ion-card-content>
+            {{ ingredient.weight }}
+          </ion-card-content>
+
+          <ion-row>
+            <ion-col>
+              <button [navPush]="ingredientFormPage"
+                      [navParams]="ingredient"
+                      ion-button icon-left clear small>
+                <ion-icon name="create"></ion-icon>
+              </button>
+            </ion-col>
+            <ion-col>
+              <button (click)="remove(ingredient)"
+                      ion-button icon-left clear small float-right>
+                <ion-icon name="trash"></ion-icon>
+              </button>
+            </ion-col>
+          </ion-row>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

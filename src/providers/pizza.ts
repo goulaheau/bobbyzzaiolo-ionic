@@ -1,13 +1,22 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
-import { Pizza } from '../../models/pizza';
+import { Pizza } from '../models/pizza';
+import { SocketProvider } from './socket';
 
 @Injectable()
 export class PizzaProvider {
   private url = 'https://bobbyzzaiolo-node-goulaheau.c9users.io/pizzas';
 
-  constructor(private http: HttpClient) {
+  pizzaCreated$: Observable<Pizza>;
+  pizzaUpdated$: Observable<Pizza>;
+  pizzaRemoved$: Observable<Pizza>;
+
+  constructor(private http: HttpClient,
+              private socketService: SocketProvider) {
+    this.pizzaCreated$ = this.socketService.listen('[Pizza] Created');
+    this.pizzaUpdated$ = this.socketService.listen('[Pizza] Updated');
+    this.pizzaRemoved$ = this.socketService.listen('[Pizza] Removed');
   }
 
   getAll(): Observable<Pizza[]> {

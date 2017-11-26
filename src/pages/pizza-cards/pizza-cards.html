@@ -11,28 +11,42 @@
   <ion-grid>
     <ion-row>
       <ion-col col-12>
-        <h1>La carte</h1>
+        <ng-container *ngIf="!inAdmin">
+          <h1>La carte</h1>
+        </ng-container>
+        <ng-container *ngIf="inAdmin">
+          <h1>
+            Pizzas
+            <ion-icon name="add-circle" [navPush]="pizzaFormPage" small></ion-icon>
+          </h1>
+
+        </ng-container>
       </ion-col>
     </ion-row>
     <ion-row>
       <ion-col col-lg-2 col-md-3 col-sm-6 *ngFor="let pizza of pizzas">
-        <ion-card [navPush]="pizzaDetailPage" [navParams]="pizza">
-          <ion-card-header>
+        <ion-card>
+          <ion-card-header [navPush]="pizzaDetailPage"
+                           [navParams]="pizza">
             {{pizza.name}} - {{pizza.price}} €
           </ion-card-header>
 
-          <ion-card-content>
+          <ion-card-content [navPush]="pizzaDetailPage"
+                            [navParams]="pizza">
             <img src="{{pizza.image}}" alt="Image de {{pizza.name}}">
           </ion-card-content>
 
           <ion-row *ngIf="inAdmin">
             <ion-col>
-              <button ion-button icon-left clear small>
+              <button [navPush]="pizzaFormPage"
+                      [navParams]="pizza"
+                      ion-button icon-left clear small>
                 <ion-icon name="create"></ion-icon>
               </button>
             </ion-col>
             <ion-col>
-              <button ion-button icon-left clear small float-right>
+              <button (click)="remove(pizza)"
+                ion-button icon-left clear small float-right>
                 <ion-icon name="trash"></ion-icon>
               </button>
             </ion-col>

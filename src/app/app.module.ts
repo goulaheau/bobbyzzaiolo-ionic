@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
@@ -6,22 +7,31 @@ import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
 import { PizzaCardsPage } from '../pages/pizza-cards/pizza-cards';
-import { PizzaProvider } from '../providers/pizza/pizza';
+import { PizzaProvider } from '../providers/pizza';
 import { PizzaDetailPage } from '../pages/pizza-detail/pizza-detail';
 import { HttpClientModule } from '@angular/common/http';
 import { AdminPage } from '../pages/admin/admin';
+import { PizzaFormPage } from '../pages/pizza-form/pizza-form';
+import { IngredientProvider } from '../providers/ingredient';
+import { SocketProvider } from '../providers/socket';
+import { IngredientCardsPage } from '../pages/ingredient-cards/ingredient-cards';
+import { IngredientFormPage } from '../pages/ingredient-form/ingredient-form';
 
 const pages = [
   MyApp,
   AdminPage,
   PizzaCardsPage,
-  PizzaDetailPage
+  PizzaDetailPage,
+  PizzaFormPage,
+  IngredientCardsPage,
+  IngredientFormPage
 ];
 
 @NgModule({
   declarations   : pages,
   imports        : [
     BrowserModule,
+    CommonModule,
     IonicModule.forRoot(MyApp),
     HttpClientModule
   ],
@@ -31,7 +41,9 @@ const pages = [
     StatusBar,
     SplashScreen,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
-    PizzaProvider
+    PizzaProvider,
+    IngredientProvider,
+    SocketProvider
   ]
 })
 export class AppModule {}

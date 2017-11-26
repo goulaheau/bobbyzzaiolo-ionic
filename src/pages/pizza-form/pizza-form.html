@@ -1,0 +1,59 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Bobbyzzaiolo</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <h1>{{ pizza._id ? 'Modifier' : 'Ajouter' }} une pizza</h1>
+  <form (ngSubmit)="onSubmit()">
+    <ion-list>
+      <ion-item>
+        <ion-label>Nom</ion-label>
+        <ion-input type="text"
+                   [(ngModel)]="pizza.name"
+                   name="name"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Description</ion-label>
+        <ion-textarea [(ngModel)]="pizza.description"
+                      name="description">
+        </ion-textarea>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Prix</ion-label>
+        <ion-input type="text"
+                   [(ngModel)]="pizza.price"
+                   name="price"></ion-input>
+      </ion-item>
+
+      <img [src]="pizzaImage" alt=""/>
+
+      <ion-item>
+        <ion-label>Image</ion-label>
+        <ion-input type="file" (change)="onChangeImage($event)"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Ingrédients</ion-label>
+      </ion-item>
+    </ion-list>
+
+    <div>
+      <button *ngFor="let ingredient of ingredients$ | async"
+              (click)="onClickIngredient(ingredient)"
+              [outline]="isClicked(ingredient)"
+              ion-button small type="button">
+        {{ ingredient.name }}
+      </button>
+    </div>
+
+
+    <button ion-button>{{ pizza._id ? 'Modifier' : 'Ajouter' }}</button>
+  </form>
+</ion-content>

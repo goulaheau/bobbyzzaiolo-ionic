@@ -1,6 +1,9 @@
-<ion-tabs>
+<ion-tabs [selectedIndex]="tab">
   <ion-tab [root]="pizzaCardsRoot"
            [rootParams]="rootParams"
-           tabTitle="Pizza">
+           tabTitle="Pizzas">
+  </ion-tab>
+  <ion-tab [root]="ingredientCardsRoot"
+           tabTitle="Ingrédients">
   </ion-tab>
 </ion-tabs>

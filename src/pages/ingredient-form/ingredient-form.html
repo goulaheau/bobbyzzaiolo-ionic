@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Bobbyzzaiolo</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <h1>{{ ingredient._id ? 'Modifier' : 'Ajouter' }} un ingrédient</h1>
+  <form (ngSubmit)="onSubmit()">
+    <ion-list>
+      <ion-item>
+        <ion-label>Nom</ion-label>
+        <ion-input type="text"
+                   [(ngModel)]="ingredient.name"
+                   name="name">
+        </ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Grammage</ion-label>
+        <ion-input type="text"
+                   [(ngModel)]="ingredient.weight"
+                   name="weight">
+        </ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Prix</ion-label>
+        <ion-input type="text"
+                   [(ngModel)]="ingredient.price"
+                   name="price">
+        </ion-input>
+      </ion-item>
+    </ion-list>
+
+    <button ion-button>{{ ingredient._id ? 'Modifier' : 'Ajouter' }}</button>
+  </form>
+</ion-content>
