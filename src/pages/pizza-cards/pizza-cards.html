@@ -17,9 +17,11 @@
         <ng-container *ngIf="inAdmin">
           <h1>
             Pizzas
-            <ion-icon name="add-circle" [navPush]="pizzaFormPage" small></ion-icon>
+            <ion-icon name="add-circle"
+                      [navPush]="pizzaFormPage"
+                      small>
+            </ion-icon>
           </h1>
-
         </ng-container>
       </ion-col>
     </ion-row>
@@ -33,18 +35,21 @@
 
           <ion-card-content [navPush]="pizzaDetailPage"
                             [navParams]="pizza">
-            <img src="{{pizza.image}}" alt="Image de {{pizza.name}}">
+            <img [src]="pizza.image" alt="">
           </ion-card-content>
 
-          <ion-row *ngIf="inAdmin">
-            <ion-col>
+          <ion-row>
+            <ion-col *ngIf="!inAdmin">
+              <button ion-button (click)="addItemBasket(pizza)">Ajouter au panier</button>
+            </ion-col>
+            <ion-col *ngIf="inAdmin">
               <button [navPush]="pizzaFormPage"
                       [navParams]="pizza"
                       ion-button icon-left clear small>
                 <ion-icon name="create"></ion-icon>
               </button>
             </ion-col>
-            <ion-col>
+            <ion-col *ngIf="inAdmin">
               <button (click)="remove(pizza)"
                 ion-button icon-left clear small float-right>
                 <ion-icon name="trash"></ion-icon>

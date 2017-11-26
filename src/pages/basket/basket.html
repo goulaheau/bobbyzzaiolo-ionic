@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Bobbyzzaiolo</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-grid>
+    <ion-row>
+      <ion-col col-12>
+        <h1>Panier - {{ getBasketTotal() }} €</h1>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-lg-4 col-sm-6 *ngFor="let itemBasket of basket">
+        <ion-card>
+          <ion-card-header>
+            {{ itemBasket.item.name }} - {{ +itemBasket.item.price * itemBasket.quantity }} €
+          </ion-card-header>
+
+          <ion-card-content>
+            <img [src]="itemBasket.item.image"
+                 alt="">
+          </ion-card-content>
+
+          <ion-row>
+            <ion-col>
+              Quantité
+              <input type="number"
+                     [ngModel]="itemBasket.quantity"
+                     (ngModelChange)="onChangeQuantity($event, itemBasket)"
+                     min="0">
+            </ion-col>
+            <ion-col>
+              <button ion-button (click)="onDeleteItem(itemBasket)" float-right>
+                <ion-icon name="trash"></ion-icon>
+              </button>
+            </ion-col>
+          </ion-row>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

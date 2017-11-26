@@ -11,16 +11,16 @@ import { Subscription } from 'rxjs/Subscription';
 })
 export class IngredientCardsPage implements OnDestroy {
   ingredients: Ingredient[];
-  ingredientFormPage               = IngredientFormPage;
-  subscribers: Subscription[] = [];
+  ingredientFormPage            = IngredientFormPage;
+  subscriptions: Subscription[] = [];
 
   constructor(private ingredientProvider: IngredientProvider,
               private toastCtrl: ToastController) {
-    this.subscribers.push(this.ingredientProvider.getAll().subscribe(
+    this.subscriptions.push(this.ingredientProvider.getAll().subscribe(
       ingredients => this.ingredients = ingredients
     ));
 
-    this.subscribers.push(this.ingredientProvider.ingredientCreated$.subscribe(
+    this.subscriptions.push(this.ingredientProvider.ingredientCreated$.subscribe(
       res => {
         if (this.ingredients) {
           this.ingredients.push(res);
@@ -28,7 +28,7 @@ export class IngredientCardsPage implements OnDestroy {
       }
     ));
 
-    this.subscribers.push(this.ingredientProvider.ingredientUpdated$.subscribe(
+    this.subscriptions.push(this.ingredientProvider.ingredientUpdated$.subscribe(
       res => {
         if (this.ingredients) {
           for (const i in this.ingredients) {
@@ -41,7 +41,7 @@ export class IngredientCardsPage implements OnDestroy {
       }
     ));
 
-    this.subscribers.push(this.ingredientProvider.ingredientRemoved$.subscribe(
+    this.subscriptions.push(this.ingredientProvider.ingredientRemoved$.subscribe(
       res => {
         if (this.ingredients) {
           for (const i in this.ingredients) {
@@ -70,8 +70,8 @@ export class IngredientCardsPage implements OnDestroy {
   }
 
   ngOnDestroy(): void {
-    for (const i in this.subscribers) {
-      this.subscribers[i].unsubscribe();
-    }
+    this.subscriptions.forEach(
+      subscription => subscription.unsubscribe()
+    );
   }
 }
