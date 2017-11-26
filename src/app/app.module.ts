@@ -5,32 +5,32 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
-import { HomePage } from '../pages/home/home';
+import { PizzaCardsPage } from '../pages/pizza-cards/pizza-cards';
 import { PizzaProvider } from '../providers/pizza/pizza';
 import { PizzaDetailPage } from '../pages/pizza-detail/pizza-detail';
 import { HttpClientModule } from '@angular/common/http';
+import { AdminPage } from '../pages/admin/admin';
+
+const pages = [
+  MyApp,
+  AdminPage,
+  PizzaCardsPage,
+  PizzaDetailPage
+];
 
 @NgModule({
-  declarations: [
-    MyApp,
-    HomePage,
-    PizzaDetailPage
-  ],
-  imports: [
+  declarations   : pages,
+  imports        : [
     BrowserModule,
     IonicModule.forRoot(MyApp),
     HttpClientModule
   ],
-  bootstrap: [IonicApp],
-  entryComponents: [
-    MyApp,
-    HomePage,
-    PizzaDetailPage
-  ],
-  providers: [
+  bootstrap      : [IonicApp],
+  entryComponents: pages,
+  providers      : [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
     PizzaProvider
   ]
 })

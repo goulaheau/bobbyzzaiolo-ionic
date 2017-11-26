@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavParams } from 'ionic-angular';
 import { Pizza } from '../../models/pizza';
 
 @Component({
@@ -9,9 +9,7 @@ import { Pizza } from '../../models/pizza';
 export class PizzaDetailPage {
   pizza: Pizza;
 
-  constructor(public navCtrl: NavController,
-              public navParams: NavParams) {
+  constructor(private navParams: NavParams) {
     this.pizza = this.navParams.data;
   }
-
 }

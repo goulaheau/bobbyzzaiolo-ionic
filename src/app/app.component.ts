@@ -3,7 +3,8 @@ import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
-import { HomePage } from '../pages/home/home';
+import { PizzaCardsPage } from '../pages/pizza-cards/pizza-cards';
+import { AdminPage } from '../pages/admin/admin';
 
 @Component({
   templateUrl: 'app.html'
@@ -11,7 +12,7 @@ import { HomePage } from '../pages/home/home';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = HomePage;
+  rootPage: any = PizzaCardsPage;
 
   pages: Array<{ title: string, component: any }>;
 
@@ -21,7 +22,8 @@ export class MyApp {
     this.initializeApp();
 
     this.pages = [
-      { title: 'La carte', component: HomePage }
+      { title: 'La carte', component: PizzaCardsPage },
+      { title: 'Administration', component: AdminPage }
     ];
 
   }

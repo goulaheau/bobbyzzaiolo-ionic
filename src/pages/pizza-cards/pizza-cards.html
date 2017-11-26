@@ -20,9 +20,23 @@
           <ion-card-header>
             {{pizza.name}} - {{pizza.price}} €
           </ion-card-header>
+
           <ion-card-content>
             <img src="{{pizza.image}}" alt="Image de {{pizza.name}}">
           </ion-card-content>
+
+          <ion-row *ngIf="inAdmin">
+            <ion-col>
+              <button ion-button icon-left clear small>
+                <ion-icon name="create"></ion-icon>
+              </button>
+            </ion-col>
+            <ion-col>
+              <button ion-button icon-left clear small float-right>
+                <ion-icon name="trash"></ion-icon>
+              </button>
+            </ion-col>
+          </ion-row>
         </ion-card>
       </ion-col>
     </ion-row>
