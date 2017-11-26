@@ -14,7 +14,12 @@
         <h1>Panier - {{ getBasketTotal() }} €</h1>
       </ion-col>
     </ion-row>
-    <ion-row>
+    <ion-row *ngIf="basket.length === 0">
+      <ion-col>
+        Aucune pizza dans le panier.
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="basket.length > 0">
       <ion-col col-lg-4 col-sm-6 *ngFor="let itemBasket of basket">
         <ion-card>
           <ion-card-header>
