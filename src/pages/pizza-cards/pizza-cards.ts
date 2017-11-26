@@ -5,7 +5,6 @@ import { PizzaDetailPage } from '../pizza-detail/pizza-detail';
 import { NavParams, ToastController } from 'ionic-angular';
 import { PizzaFormPage } from '../pizza-form/pizza-form';
 import { Subscription } from 'rxjs/Subscription';
-import { BasketProvider } from '../../providers/basket';
 
 @Component({
   selector   : 'page-pizza-cards',
@@ -13,20 +12,19 @@ import { BasketProvider } from '../../providers/basket';
 })
 export class PizzaCardsPage implements OnDestroy {
   pizzas: Pizza[];
-  pizzaDetailPage               = PizzaDetailPage;
-  pizzaFormPage                 = PizzaFormPage;
+  pizzaDetailPage             = PizzaDetailPage;
+  pizzaFormPage               = PizzaFormPage;
   inAdmin: boolean;
-  subscriptions: Subscription[] = [];
+  subscribers: Subscription[] = [];
 
   constructor(private pizzaProvider: PizzaProvider,
               private navParams: NavParams,
-              private toastCtrl: ToastController,
-              private basketProvider: BasketProvider) {
-    this.subscriptions.push(this.pizzaProvider.getAll().subscribe(
+              private toastCtrl: ToastController) {
+    this.subscribers.push(this.pizzaProvider.getAll().subscribe(
       pizzas => this.pizzas = pizzas
     ));
 
-    this.subscriptions.push(this.pizzaProvider.pizzaCreated$.subscribe(
+    this.subscribers.push(this.pizzaProvider.pizzaCreated$.subscribe(
       res => {
         if (this.pizzas) {
           this.pizzas.push(res);
@@ -40,7 +38,7 @@ export class PizzaCardsPage implements OnDestroy {
       }
     ));
 
-    this.subscriptions.push(this.pizzaProvider.pizzaUpdated$.subscribe(
+    this.subscribers.push(this.pizzaProvider.pizzaUpdated$.subscribe(
       res => {
         if (this.pizzas) {
           for (const i in this.pizzas) {
@@ -53,7 +51,7 @@ export class PizzaCardsPage implements OnDestroy {
       }
     ));
 
-    this.subscriptions.push(this.pizzaProvider.pizzaRemoved$.subscribe(
+    this.subscribers.push(this.pizzaProvider.pizzaRemoved$.subscribe(
       res => {
         if (this.pizzas) {
           for (const i in this.pizzas) {
@@ -67,13 +65,6 @@ export class PizzaCardsPage implements OnDestroy {
     ));
 
     this.inAdmin = this.navParams.data.admin ? this.navParams.data.admin : false;
-  }
-
-  addItemBasket(pizza: Pizza): void {
-    this.basketProvider.updateBasket(
-      '[BASKET] ADD_ITEM',
-      { item: pizza, quantity: 1 }
-    );
   }
 
   remove(pizza: Pizza): void {
@@ -91,8 +82,8 @@ export class PizzaCardsPage implements OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.subscriptions.forEach(
-      subscription => subscription.unsubscribe()
-    );
+    for (const i in this.subscribers) {
+      this.subscribers[i].unsubscribe();
+    }
   }
 }

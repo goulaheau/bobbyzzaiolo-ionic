@@ -16,8 +16,6 @@ import { IngredientProvider } from '../providers/ingredient';
 import { SocketProvider } from '../providers/socket';
 import { IngredientCardsPage } from '../pages/ingredient-cards/ingredient-cards';
 import { IngredientFormPage } from '../pages/ingredient-form/ingredient-form';
-import { BasketProvider } from '../providers/basket';
-import { BasketPage } from '../pages/basket/basket';
 
 const pages = [
   MyApp,
@@ -26,8 +24,7 @@ const pages = [
   PizzaDetailPage,
   PizzaFormPage,
   IngredientCardsPage,
-  IngredientFormPage,
-  BasketPage
+  IngredientFormPage
 ];
 
 @NgModule({
@@ -46,8 +43,7 @@ const pages = [
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     PizzaProvider,
     IngredientProvider,
-    SocketProvider,
-    BasketProvider
+    SocketProvider
   ]
 })
 export class AppModule {}
